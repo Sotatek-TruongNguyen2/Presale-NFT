@@ -1,0 +1,45 @@
+{
+  "name": "smart-contract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bsc:deploy": "hardhat deploy --network bsc --reset",
+    "rinkeby:deploy": "hardhat deploy --network rinkeby --reset",
+    "rinkeby:verify": "hardhat --network rinkeby etherscan-verify --solc-input",
+    "bsc:verify": "hardhat --network bsc etherscan-verify --solc-input",
+    "test": "npx hardhat test"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/contracts-upgradeable": "^4.3.1",
+    "@typechain/ethers-v5": "^5.0.0",
+    "bignumber.js": "^9.0.1",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.3",
+    "hardhat": "^2.4.1",
+    "hardhat-abi-exporter": "^2.2.1",
+    "hardhat-deploy": "^0.7.0-beta.44",
+    "hardhat-gas-reporter": "^1.0.4",
+    "hardhat-typechain": "^0.3.5",
+    "keccak256": "^1.0.3",
+    "merkletreejs": "^0.2.13",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^10.0.0",
+    "typechain": "^4.0.0",
+    "typescript": "^4.3.4"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "@types/mocha": "^8.2.2",
+    "create-react-app": "^4.0.3",
+    "ethereum-waffle": "^3.4.0",
+    "hardhat-log-remover": "^2.0.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
