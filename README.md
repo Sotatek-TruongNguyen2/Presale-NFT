@@ -20,3 +20,9 @@
 4. Demo Frontend Features. For instance, buy presale NFT, toggle presale status, set baseURI when presale is ended, add to whitelist, etc
     + query information in smart contract includes presale item price, presale status, tokenID metadata
     + In this demo, i using ethers.js for interacting with smart contract. you can use web3 instead
+
+5. Rinkeby Contract Addresses for testing purpose
+    + NFT: 0xc5888baB1548FB31D3a44e6b166Dc37CeAE84864
+    + BuyPresale txs:
+        - https://rinkeby.etherscan.io/tx/0x0866b1c13f09788dd6501531808713a611422f77bde9aba7a026f9e89376de89
+        - https://rinkeby.etherscan.io/tx/0xd742980378e65905194497f4a93c67757e635fb92df2b8547587992a367a7745
