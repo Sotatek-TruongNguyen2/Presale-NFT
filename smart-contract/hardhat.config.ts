@@ -17,7 +17,6 @@ dotenv.config();
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const BSC_API_KEY = process.env.BSC_API_KEY;
 const INFURA_API_KEY= process.env.INFURA_API_KEY;
-const MNEMONIC = process.env.MNEMONIC;
 const ALCHEMY_KEY = process.env.ALCHEMY_KEY;
 const PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY;
 const PRIVATE_KEY_BSC = process.env.DEPLOYER_PRIVATE_KEY_BSC;
@@ -33,19 +32,6 @@ enum CHAIN_IDS {
   bsc = 97
 };
 
-const createTestnetConfig = (network: CHAIN_IDS): NetworkUserConfig => {
-  const url: string = 'https://' + CHAIN_IDS[network] + '.infura.io/v3/' + INFURA_API_KEY;
-  return {
-    accounts: {
-      count: 10,
-      initialIndex: 0,
-      mnemonic: MNEMONIC,
-      path: "m/44'/60'/0'/0",
-    },
-    chainId: network,
-    url,
-  };
-}
 
 const config: HardhatUserConfig & { namedAccounts: any } = {
   abiExporter: {
@@ -87,15 +73,11 @@ const config: HardhatUserConfig & { namedAccounts: any } = {
         blockNumber: 12618875
       }
     },
-    mainnet: createTestnetConfig(CHAIN_IDS.mainnet),
     rinkeby: {
       accounts: [PRIVATE_KEY as string, DEV_PRIVATE_KEY as string],
       url: 'https://rinkeby.infura.io/v3/' + INFURA_API_KEY,
       chainId: 4
     },
-    goerli: createTestnetConfig(CHAIN_IDS.goerli),
-    ropsten: createTestnetConfig(CHAIN_IDS.ropsten),
-    kovan: createTestnetConfig(CHAIN_IDS.kovan),
     bsc: {
       accounts: [PRIVATE_KEY_BSC as string, DEV_PRIVATE_KEY as string],
       chainId: 97,
@@ -109,7 +91,7 @@ const config: HardhatUserConfig & { namedAccounts: any } = {
   namedAccounts: {
     deployer: {
       default: 0,
-      [CHAIN_IDS.rinkeby]: "0x9ef6eBF5A3E71d7f89eAdb94c8EA4293E64E4B4e",
+      [CHAIN_IDS.rinkeby]: "0x73964F6F211D5a8428322EDFbDfEc72FF76D9fCd",
       [CHAIN_IDS.bsc]: "0x73964F6F211D5a8428322EDFbDfEc72FF76D9fCd"
     },
     dev: {

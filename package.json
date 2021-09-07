@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "meta:reveal:render": "node ./renderMetadata.js",
     "meta:fake:render": "node ./renderMetadata.js",
-    "meta:upload": "ipfs add ./metadata/* --wrap-with-directory",
+    "meta:upload": "ipfs add ./smart-contract-metadata/metadata/* --wrap-with-directory",
+    "image:upload": "ipfs add ./smart-contract-metadata/assets/* --wrap-with-directory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

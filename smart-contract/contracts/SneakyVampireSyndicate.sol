@@ -43,7 +43,9 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     bool public presaleLive;
     bool public saleLive;
     
-    constructor() ERC721("Sneaky Vampire Syndicate", "SVS") { }
+    constructor(string memory defaultBaseURI_) ERC721("Sneaky Vampire Syndicate", "SVS") {
+        _defaultBaseURI = defaultBaseURI_;
+    }
     
     function addToPresaleList(address[] calldata entries) external onlyOwner {
         for(uint256 i = 0; i < entries.length; i++) {
