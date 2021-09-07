@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.0;
 
 /*
      ▄█▀▀▀█▄█   ▀████▀   ▀███▀    ▄█▀▀▀█▄█
@@ -23,12 +23,14 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     uint256 public constant SVS_GIFT = 88;
     uint256 public constant SVS_PRIVATE = 800;
     uint256 public constant SVS_PUBLIC = 8000;
-    uint256 public constant SVS_MAX = SVS_GIFT + SVS_PRIVATE + SVS_PUBLIC;
+    uint256 public constant SVS_MAX = SVS_GIFT + SVS_PUBLIC + SVS_PRIVATE;
     uint256 public constant SVS_PRICE = 0.08 ether;
-    uint256 public constant SVS_PER_MINT = 10;
+    uint256 public constant SVS_PER_MINT = 3;
+    uint256 public constant SVS_PUBLIC_PER_SALER = 5;
     
-    mapping(address => bool) public presalerList;
+    mapping(address => uint256) public presalerList;
     mapping(address => uint256) public presalerListPurchases;
+    mapping(address => uint256) public salerListPurchases;
     
     string private _contractURI;
     string private _tokenBaseURI;
@@ -39,7 +41,6 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     uint256 public giftedAmount;
     uint256 public publicAmountMinted;
     uint256 public privateAmountMinted;
-    uint256 public presalePurchaseLimit = 2;
     bool public presaleLive;
     bool public saleLive;
     
@@ -47,13 +48,12 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
         _defaultBaseURI = defaultBaseURI_;
     }
     
-    function addToPresaleList(address[] calldata entries) external onlyOwner {
+    function addToPresaleList(address[] calldata entries, uint[] calldata maxAmounts) external onlyOwner {
+        require(entries.length == maxAmounts.length, "DIFFERENT_SIZE");
         for(uint256 i = 0; i < entries.length; i++) {
             address entry = entries[i];
             require(entry != address(0), "NULL_ADDRESS");
-            require(!presalerList[entry], "DUPLICATE_ENTRY");
-
-            presalerList[entry] = true;
+            presalerList[entry] = maxAmounts[i];
         }   
     }
 
@@ -62,7 +62,7 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
             address entry = entries[i];
             require(entry != address(0), "NULL_ADDRESS");
             
-            presalerList[entry] = false;
+            presalerList[entry] = 0;
         }
     }
     
@@ -72,20 +72,22 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
         require(totalSupply() < SVS_MAX, "All Vampires are minted");
         require(publicAmountMinted + tokenQuantity <= SVS_PUBLIC, "Minting would exceed the max pubic supply");
         require(tokenQuantity <= SVS_PER_MINT, "You can mint up to 10 Vampires per transaction");
+        require(salerListPurchases[msg.sender] + tokenQuantity <= SVS_PUBLIC_PER_SALER, "You can not mint exceeds maximum NFT");
         require(SVS_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
         
         for(uint256 i = 0; i < tokenQuantity; i++) {
             publicAmountMinted++;
+            salerListPurchases[msg.sender]++;
             _safeMint(msg.sender, totalSupply() + 1);
         }
     }
     
     function presaleBuy(uint256 tokenQuantity) external payable {
         require(!saleLive && presaleLive, "The presale is closed");
-        require(presalerList[msg.sender], "You are not qualified for the presale");
+        require(presalerList[msg.sender] > 0, "You are not qualified for the presale");
         require(totalSupply() < SVS_MAX, "All Vampires are minted");
         require(privateAmountMinted + tokenQuantity <= SVS_PRIVATE, "Minting would exceed the presale allocation");
-        require(presalerListPurchases[msg.sender] + tokenQuantity <= presalePurchaseLimit, "You can mint up to 2 Vampires in the presale");
+        require(presalerListPurchases[msg.sender] + tokenQuantity <= presalerList[msg.sender], "You can not mint exceeds maximum NFT");
         require(SVS_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
         
         for (uint256 i = 0; i < tokenQuantity; i++) {
@@ -111,7 +113,7 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     }
     
     function isPresaler(address addr) external view returns (bool) {
-        return presalerList[addr];
+        return presalerList[addr] > 0;
     }
     
     function presalePurchasedCount(address addr) external view returns (uint256) {

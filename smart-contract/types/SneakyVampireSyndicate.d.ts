@@ -29,7 +29,8 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     "SVS_PRICE()": FunctionFragment;
     "SVS_PRIVATE()": FunctionFragment;
     "SVS_PUBLIC()": FunctionFragment;
-    "addToPresaleList(address[])": FunctionFragment;
+    "SVS_PUBLIC_PER_SALER()": FunctionFragment;
+    "addToPresaleList(address[],uint256[])": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "buy(uint256)": FunctionFragment;
@@ -46,7 +47,6 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     "ownerOf(uint256)": FunctionFragment;
     "presaleBuy(uint256)": FunctionFragment;
     "presaleLive()": FunctionFragment;
-    "presalePurchaseLimit()": FunctionFragment;
     "presalePurchasedCount(address)": FunctionFragment;
     "presalerList(address)": FunctionFragment;
     "presalerListPurchases(address)": FunctionFragment;
@@ -57,6 +57,7 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "saleLive()": FunctionFragment;
+    "salerListPurchases(address)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setBaseURI(string)": FunctionFragment;
     "setContractURI(string)": FunctionFragment;
@@ -91,8 +92,12 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "SVS_PUBLIC_PER_SALER",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "addToPresaleList",
-    values: [string[]]
+    values: [string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -141,10 +146,6 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "presalePurchaseLimit",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "presalePurchasedCount",
     values: [string]
   ): string;
@@ -178,6 +179,10 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "saleLive", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "salerListPurchases",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [string, boolean]
@@ -247,6 +252,10 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "SVS_PUBLIC", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "SVS_PUBLIC_PER_SALER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "addToPresaleList",
     data: BytesLike
   ): Result;
@@ -288,10 +297,6 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "presalePurchaseLimit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "presalePurchasedCount",
     data: BytesLike
   ): Result;
@@ -325,6 +330,10 @@ interface SneakyVampireSyndicateInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "saleLive", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "salerListPurchases",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll",
     data: BytesLike
@@ -429,13 +438,19 @@ export class SneakyVampireSyndicate extends Contract {
 
     "SVS_PUBLIC()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    SVS_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "SVS_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     addToPresaleList(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "addToPresaleList(address[])"(
+    "addToPresaleList(address[],uint256[])"(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -555,10 +570,6 @@ export class SneakyVampireSyndicate extends Contract {
 
     "presaleLive()"(overrides?: CallOverrides): Promise<[boolean]>;
 
-    presalePurchaseLimit(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "presalePurchaseLimit()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     presalePurchasedCount(
       addr: string,
       overrides?: CallOverrides
@@ -569,12 +580,12 @@ export class SneakyVampireSyndicate extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    presalerList(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+    presalerList(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "presalerList(address)"(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[BigNumber]>;
 
     presalerListPurchases(
       arg0: string,
@@ -630,6 +641,16 @@ export class SneakyVampireSyndicate extends Contract {
     saleLive(overrides?: CallOverrides): Promise<[boolean]>;
 
     "saleLive()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    salerListPurchases(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "salerListPurchases(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     setApprovalForAll(
       operator: string,
@@ -796,13 +817,19 @@ export class SneakyVampireSyndicate extends Contract {
 
   "SVS_PUBLIC()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  SVS_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "SVS_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   addToPresaleList(
     entries: string[],
+    maxAmounts: BigNumberish[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "addToPresaleList(address[])"(
+  "addToPresaleList(address[],uint256[])"(
     entries: string[],
+    maxAmounts: BigNumberish[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -919,10 +946,6 @@ export class SneakyVampireSyndicate extends Contract {
 
   "presaleLive()"(overrides?: CallOverrides): Promise<boolean>;
 
-  presalePurchaseLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "presalePurchaseLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   presalePurchasedCount(
     addr: string,
     overrides?: CallOverrides
@@ -933,12 +956,12 @@ export class SneakyVampireSyndicate extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  presalerList(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  presalerList(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "presalerList(address)"(
     arg0: string,
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<BigNumber>;
 
   presalerListPurchases(
     arg0: string,
@@ -994,6 +1017,16 @@ export class SneakyVampireSyndicate extends Contract {
   saleLive(overrides?: CallOverrides): Promise<boolean>;
 
   "saleLive()"(overrides?: CallOverrides): Promise<boolean>;
+
+  salerListPurchases(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "salerListPurchases(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   setApprovalForAll(
     operator: string,
@@ -1152,13 +1185,19 @@ export class SneakyVampireSyndicate extends Contract {
 
     "SVS_PUBLIC()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    SVS_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SVS_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     addToPresaleList(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "addToPresaleList(address[])"(
+    "addToPresaleList(address[],uint256[])"(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1269,10 +1308,6 @@ export class SneakyVampireSyndicate extends Contract {
 
     "presaleLive()"(overrides?: CallOverrides): Promise<boolean>;
 
-    presalePurchaseLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "presalePurchaseLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     presalePurchasedCount(
       addr: string,
       overrides?: CallOverrides
@@ -1283,12 +1318,12 @@ export class SneakyVampireSyndicate extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    presalerList(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    presalerList(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "presalerList(address)"(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<BigNumber>;
 
     presalerListPurchases(
       arg0: string,
@@ -1344,6 +1379,16 @@ export class SneakyVampireSyndicate extends Contract {
     saleLive(overrides?: CallOverrides): Promise<boolean>;
 
     "saleLive()"(overrides?: CallOverrides): Promise<boolean>;
+
+    salerListPurchases(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "salerListPurchases(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     setApprovalForAll(
       operator: string,
@@ -1516,13 +1561,19 @@ export class SneakyVampireSyndicate extends Contract {
 
     "SVS_PUBLIC()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    SVS_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SVS_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     addToPresaleList(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "addToPresaleList(address[])"(
+    "addToPresaleList(address[],uint256[])"(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1639,10 +1690,6 @@ export class SneakyVampireSyndicate extends Contract {
 
     "presaleLive()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    presalePurchaseLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "presalePurchaseLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     presalePurchasedCount(
       addr: string,
       overrides?: CallOverrides
@@ -1714,6 +1761,16 @@ export class SneakyVampireSyndicate extends Contract {
     saleLive(overrides?: CallOverrides): Promise<BigNumber>;
 
     "saleLive()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    salerListPurchases(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "salerListPurchases(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     setApprovalForAll(
       operator: string,
@@ -1867,13 +1924,23 @@ export class SneakyVampireSyndicate extends Contract {
 
     "SVS_PUBLIC()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    SVS_PUBLIC_PER_SALER(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "SVS_PUBLIC_PER_SALER()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     addToPresaleList(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "addToPresaleList(address[])"(
+    "addToPresaleList(address[],uint256[])"(
       entries: string[],
+      maxAmounts: BigNumberish[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
@@ -2001,14 +2068,6 @@ export class SneakyVampireSyndicate extends Contract {
 
     "presaleLive()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    presalePurchaseLimit(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "presalePurchaseLimit()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     presalePurchasedCount(
       addr: string,
       overrides?: CallOverrides
@@ -2091,6 +2150,16 @@ export class SneakyVampireSyndicate extends Contract {
     saleLive(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "saleLive()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    salerListPurchases(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "salerListPurchases(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     setApprovalForAll(
       operator: string,

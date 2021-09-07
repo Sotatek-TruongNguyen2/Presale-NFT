@@ -183,11 +183,29 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "SVS_PUBLIC_PER_SALER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address[]",
         "name": "entries",
         "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "maxAmounts",
+        "type": "uint256[]"
       }
     ],
     "name": "addToPresaleList",
@@ -444,19 +462,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "presalePurchaseLimit",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -486,9 +491,9 @@
     "name": "presalerList",
     "outputs": [
       {
-        "internalType": "bool",
+        "internalType": "uint256",
         "name": "",
-        "type": "bool"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -631,6 +636,25 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "salerListPurchases",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
