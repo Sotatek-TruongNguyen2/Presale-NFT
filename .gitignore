@@ -1,7 +1,15 @@
 /node_modules
 /node_modules/**
 /metadata
+
+
 /assets
+
+.env
+
+#Hardhat files
+cache
+artifacts
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 

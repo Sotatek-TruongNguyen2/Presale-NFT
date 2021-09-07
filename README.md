@@ -22,7 +22,8 @@
     + In this demo, i using ethers.js for interacting with smart contract. you can use web3 instead
 
 5. Rinkeby Contract Addresses for testing purpose
-    + NFT: 0xc5888baB1548FB31D3a44e6b166Dc37CeAE84864
+    + NFT: 0x87c3215720fe3140f326a24450bd8db4d8536daf
     + BuyPresale txs:
-        - https://rinkeby.etherscan.io/tx/0x0866b1c13f09788dd6501531808713a611422f77bde9aba7a026f9e89376de89
-        - https://rinkeby.etherscan.io/tx/0xd742980378e65905194497f4a93c67757e635fb92df2b8547587992a367a7745
+        - https://rinkeby.etherscan.io/tx/0xfbca5d969942d0fbeb176db62084797f3e202fe2ed5ea7877ffbf94646e86202
+        - https://rinkeby.etherscan.io/tx/0xb2e09634fafcf16ea956ac5e6a4befdb5afec9a4a7049157d2d560c2e7583ead
+        - https://rinkeby.etherscan.io/tx/0x321dce8ed140011ea7a3e99965620db2238f7e0f7cb445baa6ae4dc60a45004b

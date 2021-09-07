@@ -37,14 +37,14 @@ function App() {
     await window.ethereum.enable();
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const presaleAddress = "0xc5888baB1548FB31D3a44e6b166Dc37CeAE84864";
+    const presaleAddress = "0x87c3215720fE3140f326A24450bD8db4d8536Daf";
     const contract = new ethers.Contract(presaleAddress, ABI, signer);
     console.log(contract);
     setInstance(contract);
   }
 
   const addToWhitelist = async () => {
-    const tx = await instance.addToPresaleList([input]);
+    const tx = await instance.addToPresaleList([input], [8]);
     const receipt = await tx.wait(1);
     console.log(receipt);
   }
@@ -105,9 +105,9 @@ function App() {
       <br />
       <button onClick={setTokenURIAfterPresale} style={{marginTop: 10}}>SET TOKEN URI AFTER PRESALE NFT</button>
       <br />
-      <div style={{ marginTop: 10 }}>
-      <label>Real new URI: </label>
-      <input type="checkbox" onChange={e => setReplace(e.target.checked)} />
+      <div style={{marginTop: 10}}>
+        <label>Real new URI: </label>
+        <input type="checkbox" onChange={e => setReplace(e.target.checked)} />
       </div>
       <br />
       <button onClick={() => queryFromIPFS(tokenId)} style={{marginTop: 10}}>QUERY TOKEN URI BY TOKEN ID</button>
