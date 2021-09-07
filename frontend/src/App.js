@@ -13,12 +13,19 @@ function App() {
   const [tokenURIData, setTokenURIData] = useState(null);
   const [presaleStatus, setPresaleStatus] = useState(false);
   const [input, setInput] = useState("");
-
+  const [replace, setReplace] = useState(false);
 
   const queryFromIPFS = async (id) => {
-    const tokenURI = await instance.tokenURI(id);
+    let tokenURI = "";
+
+    tokenURI = await instance.tokenURI(id);
+
+    if (replace) {
+      tokenURI = `https://ipfs.io/ipfs/QmSy4DbJnDNepqej9Hxp3Rfc9Vmvwg3u2dNu2fQF5HFrfU/${id}`
+    }
+
     setTokenURI(tokenURI);
-    console.log(tokenURI);
+
     fetch(`${tokenURI}`)
       .then(res => res.json()).then(data => {
         console.log(data.image);
@@ -84,8 +91,10 @@ function App() {
       <p>NFT price: {nftPrice} ETH</p>
       <p>NFT Presale Open: {presaleStatus ? 'Open' : 'Not yet!'}</p>
       <br />
+      <label>Address: </label>
       <input type="text" onChange={(e) => setInput(e.target.value)} />
       <br />
+      <label>Token ID: </label>
       <input type="text" onChange={(e) => setTokenId(e.target.value)} style={{marginTop: 10}} />
       <br />
       <button onClick={addToWhitelist} style={{marginTop: 10}}>ADD TO WHITELIST</button>
@@ -95,6 +104,11 @@ function App() {
       <button onClick={buyPresaleNFT} style={{marginTop: 10}}>BUY PRESALE NFT</button>
       <br />
       <button onClick={setTokenURIAfterPresale} style={{marginTop: 10}}>SET TOKEN URI AFTER PRESALE NFT</button>
+      <br />
+      <div style={{ marginTop: 10 }}>
+      <label>Real new URI: </label>
+      <input type="checkbox" onChange={e => setReplace(e.target.checked)} />
+      </div>
       <br />
       <button onClick={() => queryFromIPFS(tokenId)} style={{marginTop: 10}}>QUERY TOKEN URI BY TOKEN ID</button>
       <br />

@@ -30,9 +30,9 @@ const runAsync = async () => {
     ]
 
     for (let i = 1; i <= metaDatas.length; i++) {
-        let data = JSON.stringify(metaDatas[i]);
+        let data = JSON.stringify(metaDatas[i - 1]);
         console.log(data);
-        fs.writeFileSync(`./smart-contract-metadata/newMetadata/${i}`, data);
+        fs.writeFileSync(`./smart-contract-metadata/realMetadata/${i}`, data);
     }
 }
 
