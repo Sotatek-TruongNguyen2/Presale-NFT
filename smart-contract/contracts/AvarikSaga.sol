@@ -1,32 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
-/*
-     ▄█▀▀▀█▄█   ▀████▀   ▀███▀    ▄█▀▀▀█▄█
-    ▄██    ▀█     ▀██    ▄▄█     ▄██    ▀█
-    ▀███▄          ██▄  ▄██      ▀███▄    
-     ▀█████▄       ██▄  ▄█        ▀█████▄
-    ▄     ▀██       ▀████▀       ▄     ▀██
-    ██     ██        ▄██▄        ██     ██
-    █▀█████▀          ██         █▀█████▀ 
-    
-      Sneaky Vampires Syndicate / 2021
-*/
                                           
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
+contract AvarikSaga is ERC721Enumerable, Ownable {
     using Strings for uint256;
     
-    uint256 public constant SVS_GIFT = 88;
-    uint256 public constant SVS_PRIVATE = 800;
-    uint256 public constant SVS_PUBLIC = 8000;
-    uint256 public constant SVS_MAX = SVS_GIFT + SVS_PUBLIC + SVS_PRIVATE;
-    uint256 public constant SVS_PRICE = 0.08 ether;
-    uint256 public constant SVS_PER_MINT = 3;
-    uint256 public constant SVS_PUBLIC_PER_SALER = 5;
+    uint256 public constant AVARIK_GIFT = 88;
+    uint256 public constant AVARIK_PRIVATE = 800;
+    uint256 public constant AVARIK_PUBLIC = 8000;
+    uint256 public constant AVARIK_MAX = AVARIK_GIFT + AVARIK_PUBLIC + AVARIK_PRIVATE;
+    uint256 public constant AVARIK_PRICE = 0.08 ether;
+    uint256 public constant AVARIK_PER_MINT = 3;
+    uint256 public constant AVARIK_PUBLIC_PER_SALER = 5;
     
     mapping(address => uint256) public presalerList;
     mapping(address => uint256) public presalerListPurchases;
@@ -44,7 +32,7 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     bool public presaleLive;
     bool public saleLive;
     
-    constructor(string memory defaultBaseURI_) ERC721("Sneaky Vampire Syndicate", "SVS") {
+    constructor(string memory defaultBaseURI_) ERC721("Avarik Saga", "AVARIK") {
         _defaultBaseURI = defaultBaseURI_;
     }
     
@@ -69,11 +57,11 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     function buy(uint256 tokenQuantity) external payable {
         require(saleLive, "Sale is not live");
         require(!presaleLive, "Only presalers can buy");
-        require(totalSupply() < SVS_MAX, "All Vampires are minted");
-        require(publicAmountMinted + tokenQuantity <= SVS_PUBLIC, "Minting would exceed the max pubic supply");
-        require(tokenQuantity <= SVS_PER_MINT, "You can mint up to 10 Vampires per transaction");
-        require(salerListPurchases[msg.sender] + tokenQuantity <= SVS_PUBLIC_PER_SALER, "You can not mint exceeds maximum NFT");
-        require(SVS_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
+        require(totalSupply() < AVARIK_MAX, "All Avariks are minted");
+        require(publicAmountMinted + tokenQuantity <= AVARIK_PUBLIC, "Minting would exceed the max pubic supply");
+        require(tokenQuantity <= AVARIK_PER_MINT, "You can mint up to 3 Avariks per transaction");
+        require(salerListPurchases[msg.sender] + tokenQuantity <= AVARIK_PUBLIC_PER_SALER, "You can not mint exceeds maximum NFT");
+        require(AVARIK_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
         
         for(uint256 i = 0; i < tokenQuantity; i++) {
             publicAmountMinted++;
@@ -85,10 +73,10 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     function presaleBuy(uint256 tokenQuantity) external payable {
         require(!saleLive && presaleLive, "The presale is closed");
         require(presalerList[msg.sender] > 0, "You are not qualified for the presale");
-        require(totalSupply() < SVS_MAX, "All Vampires are minted");
-        require(privateAmountMinted + tokenQuantity <= SVS_PRIVATE, "Minting would exceed the presale allocation");
+        require(totalSupply() < AVARIK_MAX, "All Avariks are minted");
+        require(privateAmountMinted + tokenQuantity <= AVARIK_PRIVATE, "Minting would exceed the presale allocation");
         require(presalerListPurchases[msg.sender] + tokenQuantity <= presalerList[msg.sender], "You can not mint exceeds maximum NFT");
-        require(SVS_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
+        require(AVARIK_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
         
         for (uint256 i = 0; i < tokenQuantity; i++) {
             privateAmountMinted++;
@@ -98,8 +86,8 @@ contract SneakyVampireSyndicate is ERC721Enumerable, Ownable {
     }
     
     function gift(address[] calldata receivers) external onlyOwner {
-        require(totalSupply() + receivers.length <= SVS_MAX, "MAX_MINT");
-        require(giftedAmount + receivers.length <= SVS_GIFT, "GIFTS_EMPTY");
+        require(totalSupply() + receivers.length <= AVARIK_MAX, "MAX_MINT");
+        require(giftedAmount + receivers.length <= AVARIK_GIFT, "GIFTS_EMPTY");
         
         for (uint256 i = 0; i < receivers.length; i++) {
             giftedAmount++;

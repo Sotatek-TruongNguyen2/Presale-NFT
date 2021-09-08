@@ -10,20 +10,13 @@ const deployVampire: DeployFunction = async (hre: HardhatRuntimeEnvironment) => 
     const cid = "QmVU8i23TV6MXvt3cuu9voRZVHS9SvkhW7rgsNVUJGBEuM";
     const defaultBaseURI = `https://ipfs.io/ipfs/${cid}/`;
 
-    const { address: contractAddress } = await deploy('SneakyVampireSyndicate', {
+    const { address: contractAddress } = await deploy('AvarikSaga', {
       from: deployer,
-      args: [""],
+      args: [defaultBaseURI],
       log: true,
       deterministicDeployment: false,
       gasPrice: "0xEE6B2800"
     });
-
-    await execute(
-        "SneakyVampireSyndicate", 
-        { from: deployer, gasLimit: "300000", log: true, gasPrice: "0xEE6B2800" }, 
-        "setBaseURI", 
-        defaultBaseURI 
-    );
 
     // // This execution below will turn on pre sale status immediately 
     // await execute(
