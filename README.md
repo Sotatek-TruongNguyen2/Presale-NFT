@@ -15,7 +15,7 @@
     + Step 3: Using npm run rinkeby:deploy to deploy contract to rinkeby for testing purpose. If you need to deploy to mainnet, you need to config network in hardhat.config.ts.
     + Step 4: Using npm run rinkeby:verify to verify contract source code or npx harhat verify command.
 
-4. ATTENTIONS FOR DEPLOYING CONTRACT TO MAINNET FOR PRESALE
+4. ATTENTIONS FOR DEPLOYING CONTRACT TO MAINNET
     + State Variables (You guys can change the below variables to make contract fit for purpose)
         - AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).
         - AVARIK_PRIVATE: Total Amounts of NFTs for PreSale.
