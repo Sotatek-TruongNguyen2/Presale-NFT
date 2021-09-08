@@ -67,7 +67,7 @@
                 + URI: https://ipfs.io/ipfs/${cid}/
 
 
-    + NTOES: Make sure public sale and presale status can't be "ON" at the same time. For instance, if you want to active Presale, you must turn off Public Sale and turn off Presale, and vice versa.
+    + ** NOTES **  Make sure public sale and presale status can't be "ON" at the same time. For instance, if you want to active Presale, you must turn off Public Sale and turn off Presale, and vice versa.
 
 4. Demo Frontend Features. For instance, buy presale NFT, toggle presale status, set baseURI when presale is ended, add to whitelist, etc
     + query information in smart contract includes presale item price, presale status, tokenID metadata
