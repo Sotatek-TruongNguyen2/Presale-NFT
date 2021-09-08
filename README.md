@@ -29,28 +29,28 @@
         -   function addToPresaleList(address[] calldata entries, uint[] calldata maxAmounts) external onlyOwner;
             * Add Whitelisted users to Presale list with corresponding max amounts.
             * Params: 
-                :: entries: Addresses of whitelisted users.
-                :: maxAmounts: Maximum amount of NFT can be bought by each Whitelisted users.
+                + entries: Addresses of whitelisted users.
+                + maxAmounts: Maximum amount of NFT can be bought by each Whitelisted users.
 
         -   function removeFromPresaleList(address[] calldata entries) external onlyOwner;
             * Remove Whitelisted users From Presale list.
             * Params: 
-                :: entries: Addresses of whitelisted users
+                + entries: Addresses of whitelisted users
 
         -   function buy(uint256 tokenQuantity) external payable;
             * Purchase NFT in public sale.
             * Params: 
-                :: tokenQuantity: Amounts of NFT that user want to buy.
+                + tokenQuantity: Amounts of NFT that user want to buy.
 
         -   function presaleBuy(uint256 tokenQuantity) external payable;
             * Purchase NFT in PreSale.
             * Params: 
-                :: tokenQuantity: Amounts of NFT that user want to buy.
+                + tokenQuantity: Amounts of NFT that user want to buy.
 
         -   function gift(address[] calldata receivers) external onlyOwner;
             * Gifting NFT to other users
             * Params: 
-                :: receivers: addresses of receivers
+                + receivers: addresses of receivers
 
         -   function withdraw() external onlyOwner;
             * Owner can withdraw raising amounts
@@ -64,7 +64,7 @@
         -   function setBaseURI(string calldata URI) external onlyOwner;
             * Update Base URI when revealing real metadata
             * Params:
-                :: URI: https://ipfs.io/ipfs/${cid}/
+                + URI: https://ipfs.io/ipfs/${cid}/
 
 
     + NTOES: Make sure public sale and presale status can't be "ON" at the same time. For instance, if you want to active Presale, you must turn off Public Sale and turn off Presale, and vice versa.
