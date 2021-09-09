@@ -30,6 +30,7 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "AVARIK_PRIVATE()": FunctionFragment;
     "AVARIK_PUBLIC()": FunctionFragment;
     "AVARIK_PUBLIC_PER_SALER()": FunctionFragment;
+    "PUBLIC_BUY_FREEZE_TIME()": FunctionFragment;
     "addToPresaleList(address[],uint256[])": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -57,6 +58,7 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "saleLive()": FunctionFragment;
+    "salerLastPurchased(address)": FunctionFragment;
     "salerListPurchases(address)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setBaseURI(string)": FunctionFragment;
@@ -102,6 +104,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "AVARIK_PUBLIC_PER_SALER",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PUBLIC_BUY_FREEZE_TIME",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -189,6 +195,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "saleLive", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "salerLastPurchased",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "salerListPurchases",
     values: [string]
   ): string;
@@ -274,6 +284,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "PUBLIC_BUY_FREEZE_TIME",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "addToPresaleList",
     data: BytesLike
   ): Result;
@@ -348,6 +362,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "saleLive", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "salerLastPurchased",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "salerListPurchases",
     data: BytesLike
@@ -461,6 +479,10 @@ export class AvarikSaga extends Contract {
     "AVARIK_PUBLIC_PER_SALER()"(
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     addToPresaleList(
       entries: string[],
@@ -662,6 +684,16 @@ export class AvarikSaga extends Contract {
 
     "saleLive()"(overrides?: CallOverrides): Promise<[boolean]>;
 
+    salerLastPurchased(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "salerLastPurchased(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     salerListPurchases(
       arg0: string,
       overrides?: CallOverrides
@@ -840,6 +872,10 @@ export class AvarikSaga extends Contract {
   AVARIK_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<BigNumber>;
 
   "AVARIK_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   addToPresaleList(
     entries: string[],
@@ -1038,6 +1074,16 @@ export class AvarikSaga extends Contract {
 
   "saleLive()"(overrides?: CallOverrides): Promise<boolean>;
 
+  salerLastPurchased(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "salerLastPurchased(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   salerListPurchases(
     arg0: string,
     overrides?: CallOverrides
@@ -1208,6 +1254,10 @@ export class AvarikSaga extends Contract {
     AVARIK_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<BigNumber>;
 
     "AVARIK_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     addToPresaleList(
       entries: string[],
@@ -1400,6 +1450,16 @@ export class AvarikSaga extends Contract {
 
     "saleLive()"(overrides?: CallOverrides): Promise<boolean>;
 
+    salerLastPurchased(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "salerLastPurchased(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     salerListPurchases(
       arg0: string,
       overrides?: CallOverrides
@@ -1584,6 +1644,10 @@ export class AvarikSaga extends Contract {
     AVARIK_PUBLIC_PER_SALER(overrides?: CallOverrides): Promise<BigNumber>;
 
     "AVARIK_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     addToPresaleList(
       entries: string[],
@@ -1782,6 +1846,16 @@ export class AvarikSaga extends Contract {
 
     "saleLive()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    salerLastPurchased(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "salerLastPurchased(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     salerListPurchases(
       arg0: string,
       overrides?: CallOverrides
@@ -1953,6 +2027,14 @@ export class AvarikSaga extends Contract {
     ): Promise<PopulatedTransaction>;
 
     "AVARIK_PUBLIC_PER_SALER()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PUBLIC_BUY_FREEZE_TIME(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "PUBLIC_BUY_FREEZE_TIME()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2174,6 +2256,16 @@ export class AvarikSaga extends Contract {
     saleLive(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "saleLive()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    salerLastPurchased(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "salerLastPurchased(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     salerListPurchases(
       arg0: string,

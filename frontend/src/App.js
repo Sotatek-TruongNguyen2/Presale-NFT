@@ -37,7 +37,7 @@ function App() {
     await window.ethereum.enable();
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const presaleAddress = "0x87c3215720fE3140f326A24450bD8db4d8536Daf";
+    const presaleAddress = "0x941Fabb76E2f7dc62b73f6260f1fC29a7143802E";
     const contract = new ethers.Contract(presaleAddress, ABI, signer);
     console.log(contract);
     setInstance(contract);
@@ -76,7 +76,7 @@ function App() {
   useEffect(() => {
     const getInfo = async () => {
       if (instance) {
-        const price = await instance.SVS_PRICE();
+        const price = await instance.AVARIK_PRICE();
         const presaleStatus = await instance.presaleLive();
         setNftPrice(ethers.utils.formatEther(price));
         setPresaleStatus(presaleStatus);

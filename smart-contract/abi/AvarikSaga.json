@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "defaultBaseURI_",
+        "name": "tokenBaseURI_",
         "type": "string"
       }
     ],
@@ -185,6 +185,19 @@
   {
     "inputs": [],
     "name": "AVARIK_PUBLIC_PER_SALER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PUBLIC_BUY_FREEZE_TIME",
     "outputs": [
       {
         "internalType": "uint256",
@@ -636,6 +649,25 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "salerLastPurchased",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

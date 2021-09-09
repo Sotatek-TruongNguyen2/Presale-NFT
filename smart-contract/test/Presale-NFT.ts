@@ -1,12 +1,12 @@
 import { ethers, network } from 'hardhat';
 import { expect } from "chai";
 import { Signer } from "ethers";
-import { SneakyVampireSyndicate } from '../types/SneakyVampireSyndicate';
-import { SneakyVampireSyndicate__factory } from '../types/factories/SneakyVampireSyndicate__factory';
+import { AvarikSaga } from '../types/AvarikSaga';
+import { AvarikSaga__factory } from '../types/factories/AvarikSaga__factory';
 import { expandTo18Decimals } from '../utils/utilities';
 
 describe("NFT Presale", function () {
-  let NFT: SneakyVampireSyndicate | undefined;
+  let NFT: AvarikSaga | undefined;
   let whitelistUser1: Signer | undefined;
   let whitelistUser2: Signer | undefined;
   let artist: Signer | undefined;
@@ -21,7 +21,7 @@ describe("NFT Presale", function () {
       const cid = "QmVU8i23TV6MXvt3cuu9voRZVHS9SvkhW7rgsNVUJGBEuM";
       const defaultBaseURI = `https://ipfs.io/ipfs/${cid}/`;
 
-      NFT = await new SneakyVampireSyndicate__factory(whitelistUser1).deploy(defaultBaseURI);
+      NFT = await new AvarikSaga__factory(whitelistUser1).deploy(defaultBaseURI);
       console.log("NFT: " + NFT.address);
     } catch(err: any) {
       console.log(err.message);
@@ -166,6 +166,10 @@ describe("NFT Presale", function () {
           const ownerOf = await NFT.ownerOf(i);
           expect(ownerOf).to.be.equals(whitelistAddress2);
         }
+
+        const tokenID = await NFT.tokenURI("1");
+
+        console.log(tokenID);
 
         await expect(NFT.connect(whitelistUser2).buy(1, { value: expandTo18Decimals(1) })).to.be.revertedWith("You can not mint exceeds maximum NFT");
       }

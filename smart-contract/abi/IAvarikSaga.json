@@ -1,0 +1,46 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "entries",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "maxAmounts",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "addToPresaleList",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenQuantity",
+        "type": "uint256"
+      }
+    ],
+    "name": "buy",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenQuantity",
+        "type": "uint256"
+      }
+    ],
+    "name": "presaleBuy",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]
