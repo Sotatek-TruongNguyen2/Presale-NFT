@@ -56,7 +56,7 @@ function App() {
   }
 
   const buyPresaleNFT = async () => {
-    const tx = await instance.presaleBuy(2, {value: "1000000000000000000"});
+    const tx = await instance.presaleBuy(1, {value: "80000000000000000"});
     const receipt = await tx.wait(1);
     console.log(receipt);
     alert("BUY SUCCESSFUL!");
