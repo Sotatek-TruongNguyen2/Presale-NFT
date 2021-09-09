@@ -94,7 +94,7 @@
 
 
 8. NOTES WHEN EXECUTING BATCH WHITELISTING:
-    - In smart-contract folder, i prepare whitelist.json file inside settings folder. You guys can check it out and fill it with your whitelisted users. It's a json object with key is whitelisted user' address and key is maximum NFT that user can buy in presale round.
+    - In smart-contract folder, i prepare whitelist.json file inside settings folder. You guys can check it out and fill it with your whitelisted users. It's a json object with key is whitelisted user' address and value is maximum NFT that user can buy in presale round.
     - After that, You can execute add:whitelist script to execute addToPresaleList function in smart contract. 
     - In .env file, you must change the below variables:
         + NETWORK: switch to "mainnet" if you want to deploy to ethereum mainnet.
