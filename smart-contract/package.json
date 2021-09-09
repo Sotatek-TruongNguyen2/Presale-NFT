@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "add:whitelist": "node ./scripts/BatchWhitelisted.ts",
     "bsc:deploy": "hardhat deploy --network bsc --reset",
     "rinkeby:deploy": "hardhat deploy --network rinkeby --reset",
     "rinkeby:verify": "hardhat --network rinkeby etherscan-verify --solc-input",

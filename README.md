@@ -80,3 +80,24 @@
         - https://rinkeby.etherscan.io/tx/0xb2e09634fafcf16ea956ac5e6a4befdb5afec9a4a7049157d2d560c2e7583ead
         - https://rinkeby.etherscan.io/tx/0x321dce8ed140011ea7a3e99965620db2238f7e0f7cb445baa6ae4dc60a45004b
 
+6. EXPLAIN SCRIPTS IN PACKAGE.JSON
+    + meta:fake:render => Prepare Unrevealed metadata for uploading to IPFS.
+    + meta:upload => Upload Unrevealed metadata to IPFS.
+    + meta:reveal:render =>  Upload Reveal metadata to IPFS.
+    + image:upload => Upload Images to IPFS for Reveal Metadata.
+
+7. EXPLAIN SCRIPTS IN SMART-CONTRACT FOLDER
+    + add:whitelist => Run Scripts for batch whitelisting.
+    + bsc:deploy => Deploy smart contract to BSC testnet.
+    + rinkeby:deploy => Deploy smart contract to Rinkeby testnet.
+    + rinkeby:verify => Verify smart contract on Rinkeby testnet.
+
+
+8. NOTES WHEN EXECUTING BATCH WHITELISTING:
+    - In smart-contract folder, i prepare whitelist.json file inside settings folder. You guys can check it out and fill it with your whitelisted users. It's a json object with key is whitelisted user' address and key is maximum NFT that user can buy in presale round.
+    - After that, You can execute add:whitelist script to execute addToPresaleList function in smart contract. 
+    - In .env file, you must change the below variables:
+        + NETWORK: switch to "mainnet" if you want to deploy to ethereum mainnet.
+        + AVARIK_ADDRESS: Address of NFT on ethereum mainnet.
+        + DEPLOYER_PRIVATE_KEY: Private key of Owner NFT contract.
+        + INFURA_API_KEY: Infura API key if you have. Otherwise, check out "https://infura.io/" for more information.
