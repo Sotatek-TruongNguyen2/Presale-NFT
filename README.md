@@ -109,7 +109,7 @@
         - Step 3: Upload Fake metadata to IPFS by using "meta:upload" command.
         - Step 4: Deploy Smart contract with root cid that we got from metadata above.
             + You guys can change the below variables to make contract fit for purpose
-            NOTES: 
+            + NOTES: 
                 - AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).
                 - AVARIK_PRIVATE: Total Amounts of NFTs for PreSale.
                 - AVARIK_PUBLIC: Total Amounts of NFTs for Public Sale.
