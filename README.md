@@ -101,3 +101,18 @@
         + AVARIK_ADDRESS: Address of NFT on ethereum mainnet.
         + DEPLOYER_PRIVATE_KEY: Private key of Owner NFT contract.
         + INFURA_API_KEY: Infura API key if you have. Otherwise, check out "https://infura.io/" for more information.
+
+9. MAIN FLOWS
+    + Presale:
+        - Step 1: Upload Fake metadata to IPFS.
+        - Step 2: Deploy Smart contract with root cid that we got from metadata above.
+        - Step 3: Add whitelisted users to presale list by using addToPresaleList function on smart contract.
+        - Step 4: Call function togglePresaleStatus to start presale round.
+        - Step 5: Whitelisted users can go and buy Presale NFT by using presaleBuy function.
+        - Step 6: Upload Real metadata to IPFS when presale round is ended.
+        - Step 7: Call function "setBaseURI" with new cid that we got from above: https://ipfs.io/ipfs/${cid}/.
+
+    + Sale:
+        - Step 1: Call function togglePresaleStatus again to end presale round.
+        - Step 2: Call function toggleSaleStatus to start sale round.
+        - Step 3: All Users can go and buy NFT by using buy function.
