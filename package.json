@@ -8,7 +8,7 @@
     "meta:fake:render": "node ./renderMetadata.js",
     "meta:reveal:upload": "ipfs add ./smart-contract-metadata/realMetadata/* --wrap-with-directory",
     "meta:upload": "ipfs add ./smart-contract-metadata/metadata/* --wrap-with-directory",
-    "image:upload": "ipfs add ./smart-contract-metadata/assets/* --wrap-with-directory",
+    "image:upload": "ipfs add ./smart-contract-metadata/assets/* --wrap-with-directory --only-hash"
   },
   "keywords": [],
   "author": "",
