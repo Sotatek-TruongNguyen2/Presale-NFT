@@ -1,3 +1,39 @@
++ Prerequisite:
+    - Make sure npm and nodejs is already installed in your computer. 
+        + Download link: https://nodejs.org/en/download/
+    - After cloning project from github, run "npm install" or "npm i" to make sure all packages will be installed on your local environment. 
+
++ COMMANDS THAT I USED IN PROJECT
+    + npx hardhat compile : To compile your contracts in your Hardhat project.
+
+    + npx hardhat test : To test your contracts with all the .spec.ts file in test folder.
+
+    + npm run add:whitelist : To batch add whitelisted users to list.
+
+    + npm run rinkeby:deploy : To deploy contracts to rinkeby testnet for testing purpose.
+
+    + npm run rinkeby:verify : To verify contracts after deployed to rinkeby successful.
+
+    + npm run mainnet:deploy : To deploy contracts to mainnet.
+
+    + npm run mainnet:verify : To verify contracts after deployed to mainnet successful.
+
++ EXPLAIN ALL VARIABLES IN SMART CONTRACT
+    - AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).
+    - AVARIK_PRIVATE: Total Amounts of NFTs for PreSale.
+    - AVARIK_PUBLIC: Total Amounts of NFTs for Public Sale.
+    - AVARIK_PRICE: Price of single NFT.
+    - AVARIK_PER_MINT: Max NFTs per transaction can be minted in Public Sale.
+    - AVARIK_PUBLIC_PER_SALER: Max NFTs that one person can purchase in Public Sale.
+    - PUBLIC_BUY_FREEZE_TIME: freeze time that buyer need to wait for the next buy in public sale round.
+    - _artistAddress: This address will receive 2/5 raising amounts when owner withdraw it.
+    - giftedAmount: Total Amounts of NFTs is already gifted.
+    - publicAmountMinted: Total Amount of NFTs are sold in public sale round.
+    - privateAmountMinted: Total Amount of NFTs are sold in presale round.
+    - presaleLive: Presale round is enabled or not
+    - saleLive: Public sale round is enabled or not
+    - _tokenBaseURI: Base TOKEN URI that help you link to your metadata on IPFS
+
 1. UPLOAD FAKE NFT METADATA TO IPFS
     + Step 1: You need to ensure IPFS is already installed in OS.
     + Step 2: Run IPFS daemon by using command: ipfs daemon.
