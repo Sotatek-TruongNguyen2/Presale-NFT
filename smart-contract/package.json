@@ -6,7 +6,9 @@
   "scripts": {
     "add:whitelist": "node ./scripts/BatchWhitelisted.ts",
     "bsc:deploy": "hardhat deploy --network bsc --reset",
+    "mainnet:deploy": "hardhat deploy --network mainnet --reset",
     "rinkeby:deploy": "hardhat deploy --network rinkeby --reset",
+    "mainnet:verify": "hardhat --network mainnet etherscan-verify --solc-input",
     "rinkeby:verify": "hardhat --network rinkeby etherscan-verify --solc-input",
     "bsc:verify": "hardhat --network bsc etherscan-verify --solc-input",
     "test": "npx hardhat test"

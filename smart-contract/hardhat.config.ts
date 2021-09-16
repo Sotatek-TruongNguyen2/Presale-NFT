@@ -73,6 +73,11 @@ const config: HardhatUserConfig & { namedAccounts: any } = {
         blockNumber: 12618875
       }
     },
+    mainnet: {
+      accounts: [PRIVATE_KEY as string, DEV_PRIVATE_KEY as string],
+      url: 'https://mainnet.infura.io/v3/' + INFURA_API_KEY,
+      chainId: 1
+    },
     rinkeby: {
       accounts: [PRIVATE_KEY as string, DEV_PRIVATE_KEY as string],
       url: 'https://rinkeby.infura.io/v3/' + INFURA_API_KEY,
