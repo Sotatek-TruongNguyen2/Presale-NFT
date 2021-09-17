@@ -1,3 +1,4 @@
+#### This file is all about the prerequisite when you want to start this project, metadata uploading and smart contract deployment. 
 ## Prerequisite
 1. You must equip yourself with knowledge about "IPFS" and "hardhat". These are very important tools that will help you in uploading metadata and deploying contract. 
     
