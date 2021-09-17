@@ -2,12 +2,12 @@
 - You must equip yourself with knowledge about "IPFS" and "hardhat". These are very important tools that will help you in uploading metadata and deploying contract. 
     
 - Firstly, you need to download these tools by following the links below: 
-        + https://docs.ipfs.io/install/ (For IPFS)
-        + https://hardhat.org/tutorial/setting-up-the-environment.html (For hardhat)
+    + https://docs.ipfs.io/install/ (For IPFS)
+    + https://hardhat.org/tutorial/setting-up-the-environment.html (For hardhat)
 
 - Secondly, If you don't know about these tools, please go through the guild below and try to understand about these concepts at least:
-        + https://docs.ipfs.io/how-to/command-line-quick-start/
-        + https://hardhat.org/getting-started/#quick-start
+    + https://docs.ipfs.io/how-to/command-line-quick-start/
+    + https://hardhat.org/getting-started/#quick-start
 
 - Moreover, After cloning project from github, run "npm install" or "npm i" to make sure all packages will be installed on your local environment. 
 
