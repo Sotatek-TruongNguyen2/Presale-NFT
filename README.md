@@ -11,7 +11,7 @@
 
 - Moreover, After cloning project from github, run "npm install" or "npm i" to make sure all packages will be installed on your local environment. 
 
-## Business logic
+### Business logic
     1. UPLOAD FAKE NFT METADATA TO IPFS
         + Step 1: You need to ensure IPFS is already installed in OS.
         + Step 2: Run IPFS daemon by using command: ipfs daemon.
