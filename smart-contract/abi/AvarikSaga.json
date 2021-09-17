@@ -5,6 +5,11 @@
         "internalType": "string",
         "name": "tokenBaseURI_",
         "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_whitelistSigner",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -197,6 +202,19 @@
   },
   {
     "inputs": [],
+    "name": "PRESALE_TYPEHASH",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "PUBLIC_BUY_FREEZE_TIME",
     "outputs": [
       {
@@ -206,24 +224,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "entries",
-        "type": "address[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "maxAmounts",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "addToPresaleList",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -372,25 +372,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "name": "isPresaler",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "isSaleActive",
     "outputs": [
@@ -454,6 +435,16 @@
         "internalType": "uint256",
         "name": "tokenQuantity",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxCount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
       }
     ],
     "name": "presaleBuy",
@@ -501,25 +492,6 @@
         "type": "address"
       }
     ],
-    "name": "presalerList",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
     "name": "presalerListPurchases",
     "outputs": [
       {
@@ -546,19 +518,6 @@
   },
   {
     "inputs": [],
-    "name": "proof",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "publicAmountMinted",
     "outputs": [
       {
@@ -568,19 +527,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "entries",
-        "type": "address[]"
-      }
-    ],
-    "name": "removeFromPresaleList",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -752,19 +698,6 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "hash",
-        "type": "string"
-      }
-    ],
-    "name": "setProvenanceHash",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "bytes4",
         "name": "interfaceId",
         "type": "bytes4"
@@ -917,6 +850,19 @@
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "whitelistSigner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

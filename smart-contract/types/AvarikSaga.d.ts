@@ -30,8 +30,8 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "AVARIK_PRIVATE()": FunctionFragment;
     "AVARIK_PUBLIC()": FunctionFragment;
     "AVARIK_PUBLIC_PER_SALER()": FunctionFragment;
+    "PRESALE_TYPEHASH()": FunctionFragment;
     "PUBLIC_BUY_FREEZE_TIME()": FunctionFragment;
-    "addToPresaleList(address[],uint256[])": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "buy(uint256)": FunctionFragment;
@@ -41,20 +41,16 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "giftedAmount()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "isPresaleActive()": FunctionFragment;
-    "isPresaler(address)": FunctionFragment;
     "isSaleActive()": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "presaleBuy(uint256)": FunctionFragment;
+    "presaleBuy(uint256,uint256,bytes)": FunctionFragment;
     "presaleLive()": FunctionFragment;
     "presalePurchasedCount(address)": FunctionFragment;
-    "presalerList(address)": FunctionFragment;
     "presalerListPurchases(address)": FunctionFragment;
     "privateAmountMinted()": FunctionFragment;
-    "proof()": FunctionFragment;
     "publicAmountMinted()": FunctionFragment;
-    "removeFromPresaleList(address[])": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "saleLive()": FunctionFragment;
@@ -64,7 +60,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "setBaseURI(string)": FunctionFragment;
     "setContractURI(string)": FunctionFragment;
     "setDefaultBaseURI(string)": FunctionFragment;
-    "setProvenanceHash(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "togglePresaleStatus()": FunctionFragment;
@@ -75,6 +70,7 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "whitelistSigner()": FunctionFragment;
     "withdraw()": FunctionFragment;
   };
 
@@ -107,12 +103,12 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "PUBLIC_BUY_FREEZE_TIME",
+    functionFragment: "PRESALE_TYPEHASH",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "addToPresaleList",
-    values: [string[], BigNumberish[]]
+    functionFragment: "PUBLIC_BUY_FREEZE_TIME",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -141,7 +137,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     functionFragment: "isPresaleActive",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "isPresaler", values: [string]): string;
   encodeFunctionData(
     functionFragment: "isSaleActive",
     values?: undefined
@@ -154,7 +149,7 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "presaleBuy",
-    values: [BigNumberish]
+    values: [BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "presaleLive",
@@ -165,10 +160,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "presalerList",
-    values: [string]
-  ): string;
-  encodeFunctionData(
     functionFragment: "presalerListPurchases",
     values: [string]
   ): string;
@@ -176,14 +167,9 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     functionFragment: "privateAmountMinted",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "proof", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "publicAmountMinted",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "removeFromPresaleList",
-    values: [string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -213,10 +199,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setDefaultBaseURI",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setProvenanceHash",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -256,6 +238,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelistSigner",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
   decodeFunctionResult(
@@ -284,11 +270,11 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "PUBLIC_BUY_FREEZE_TIME",
+    functionFragment: "PRESALE_TYPEHASH",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "addToPresaleList",
+    functionFragment: "PUBLIC_BUY_FREEZE_TIME",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
@@ -315,7 +301,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     functionFragment: "isPresaleActive",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "isPresaler", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isSaleActive",
     data: BytesLike
@@ -333,10 +318,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "presalerList",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "presalerListPurchases",
     data: BytesLike
   ): Result;
@@ -344,13 +325,8 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     functionFragment: "privateAmountMinted",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "proof", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "publicAmountMinted",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "removeFromPresaleList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -381,10 +357,6 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setDefaultBaseURI",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setProvenanceHash",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -419,6 +391,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "whitelistSigner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -480,21 +456,13 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    PRESALE_TYPEHASH(overrides?: CallOverrides): Promise<[string]>;
+
+    "PRESALE_TYPEHASH()"(overrides?: CallOverrides): Promise<[string]>;
+
     PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    addToPresaleList(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "addToPresaleList(address[],uint256[])"(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
 
     approve(
       to: string,
@@ -569,13 +537,6 @@ export class AvarikSaga extends Contract {
 
     "isPresaleActive()"(overrides?: CallOverrides): Promise<[boolean]>;
 
-    isPresaler(addr: string, overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isPresaler(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     isSaleActive(overrides?: CallOverrides): Promise<[boolean]>;
 
     "isSaleActive()"(overrides?: CallOverrides): Promise<[boolean]>;
@@ -600,11 +561,15 @@ export class AvarikSaga extends Contract {
 
     presaleBuy(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    "presaleBuy(uint256)"(
+    "presaleBuy(uint256,uint256,bytes)"(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
@@ -622,13 +587,6 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    presalerList(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "presalerList(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     presalerListPurchases(
       arg0: string,
       overrides?: CallOverrides
@@ -643,23 +601,9 @@ export class AvarikSaga extends Contract {
 
     "privateAmountMinted()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    proof(overrides?: CallOverrides): Promise<[string]>;
-
-    "proof()"(overrides?: CallOverrides): Promise<[string]>;
-
     publicAmountMinted(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "publicAmountMinted()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    removeFromPresaleList(
-      entries: string[],
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "removeFromPresaleList(address[])"(
-      entries: string[],
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
 
     renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -743,16 +687,6 @@ export class AvarikSaga extends Contract {
 
     "setDefaultBaseURI(string)"(
       URI: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    setProvenanceHash(
-      hash: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "setProvenanceHash(string)"(
-      hash: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -840,6 +774,10 @@ export class AvarikSaga extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    whitelistSigner(overrides?: CallOverrides): Promise<[string]>;
+
+    "whitelistSigner()"(overrides?: CallOverrides): Promise<[string]>;
+
     withdraw(overrides?: Overrides): Promise<ContractTransaction>;
 
     "withdraw()"(overrides?: Overrides): Promise<ContractTransaction>;
@@ -873,21 +811,13 @@ export class AvarikSaga extends Contract {
 
   "AVARIK_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  PRESALE_TYPEHASH(overrides?: CallOverrides): Promise<string>;
+
+  "PRESALE_TYPEHASH()"(overrides?: CallOverrides): Promise<string>;
+
   PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<BigNumber>;
 
   "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  addToPresaleList(
-    entries: string[],
-    maxAmounts: BigNumberish[],
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "addToPresaleList(address[],uint256[])"(
-    entries: string[],
-    maxAmounts: BigNumberish[],
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
 
   approve(
     to: string,
@@ -962,13 +892,6 @@ export class AvarikSaga extends Contract {
 
   "isPresaleActive()"(overrides?: CallOverrides): Promise<boolean>;
 
-  isPresaler(addr: string, overrides?: CallOverrides): Promise<boolean>;
-
-  "isPresaler(address)"(
-    addr: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   isSaleActive(overrides?: CallOverrides): Promise<boolean>;
 
   "isSaleActive()"(overrides?: CallOverrides): Promise<boolean>;
@@ -990,11 +913,15 @@ export class AvarikSaga extends Contract {
 
   presaleBuy(
     tokenQuantity: BigNumberish,
+    maxCount: BigNumberish,
+    signature: BytesLike,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  "presaleBuy(uint256)"(
+  "presaleBuy(uint256,uint256,bytes)"(
     tokenQuantity: BigNumberish,
+    maxCount: BigNumberish,
+    signature: BytesLike,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
@@ -1012,13 +939,6 @@ export class AvarikSaga extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  presalerList(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-  "presalerList(address)"(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   presalerListPurchases(
     arg0: string,
     overrides?: CallOverrides
@@ -1033,23 +953,9 @@ export class AvarikSaga extends Contract {
 
   "privateAmountMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  proof(overrides?: CallOverrides): Promise<string>;
-
-  "proof()"(overrides?: CallOverrides): Promise<string>;
-
   publicAmountMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
   "publicAmountMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  removeFromPresaleList(
-    entries: string[],
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "removeFromPresaleList(address[])"(
-    entries: string[],
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
 
   renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -1133,16 +1039,6 @@ export class AvarikSaga extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setProvenanceHash(
-    hash: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "setProvenanceHash(string)"(
-    hash: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -1222,6 +1118,10 @@ export class AvarikSaga extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  whitelistSigner(overrides?: CallOverrides): Promise<string>;
+
+  "whitelistSigner()"(overrides?: CallOverrides): Promise<string>;
+
   withdraw(overrides?: Overrides): Promise<ContractTransaction>;
 
   "withdraw()"(overrides?: Overrides): Promise<ContractTransaction>;
@@ -1255,21 +1155,13 @@ export class AvarikSaga extends Contract {
 
     "AVARIK_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    PRESALE_TYPEHASH(overrides?: CallOverrides): Promise<string>;
+
+    "PRESALE_TYPEHASH()"(overrides?: CallOverrides): Promise<string>;
+
     PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    addToPresaleList(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "addToPresaleList(address[],uint256[])"(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     approve(
       to: string,
@@ -1338,13 +1230,6 @@ export class AvarikSaga extends Contract {
 
     "isPresaleActive()"(overrides?: CallOverrides): Promise<boolean>;
 
-    isPresaler(addr: string, overrides?: CallOverrides): Promise<boolean>;
-
-    "isPresaler(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     isSaleActive(overrides?: CallOverrides): Promise<boolean>;
 
     "isSaleActive()"(overrides?: CallOverrides): Promise<boolean>;
@@ -1366,11 +1251,15 @@ export class AvarikSaga extends Contract {
 
     presaleBuy(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "presaleBuy(uint256)"(
+    "presaleBuy(uint256,uint256,bytes)"(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1388,13 +1277,6 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    presalerList(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "presalerList(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     presalerListPurchases(
       arg0: string,
       overrides?: CallOverrides
@@ -1409,23 +1291,9 @@ export class AvarikSaga extends Contract {
 
     "privateAmountMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    proof(overrides?: CallOverrides): Promise<string>;
-
-    "proof()"(overrides?: CallOverrides): Promise<string>;
-
     publicAmountMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
     "publicAmountMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    removeFromPresaleList(
-      entries: string[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "removeFromPresaleList(address[])"(
-      entries: string[],
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -1497,13 +1365,6 @@ export class AvarikSaga extends Contract {
 
     "setDefaultBaseURI(string)"(
       URI: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setProvenanceHash(hash: string, overrides?: CallOverrides): Promise<void>;
-
-    "setProvenanceHash(string)"(
-      hash: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1586,6 +1447,10 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    whitelistSigner(overrides?: CallOverrides): Promise<string>;
+
+    "whitelistSigner()"(overrides?: CallOverrides): Promise<string>;
+
     withdraw(overrides?: CallOverrides): Promise<void>;
 
     "withdraw()"(overrides?: CallOverrides): Promise<void>;
@@ -1645,21 +1510,13 @@ export class AvarikSaga extends Contract {
 
     "AVARIK_PUBLIC_PER_SALER()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    PRESALE_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PRESALE_TYPEHASH()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     PUBLIC_BUY_FREEZE_TIME(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PUBLIC_BUY_FREEZE_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    addToPresaleList(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "addToPresaleList(address[],uint256[])"(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<BigNumber>;
 
     approve(
       to: string,
@@ -1731,13 +1588,6 @@ export class AvarikSaga extends Contract {
 
     "isPresaleActive()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    isPresaler(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isPresaler(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     isSaleActive(overrides?: CallOverrides): Promise<BigNumber>;
 
     "isSaleActive()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1762,11 +1612,15 @@ export class AvarikSaga extends Contract {
 
     presaleBuy(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    "presaleBuy(uint256)"(
+    "presaleBuy(uint256,uint256,bytes)"(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
@@ -1784,13 +1638,6 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    presalerList(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "presalerList(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     presalerListPurchases(
       arg0: string,
       overrides?: CallOverrides
@@ -1805,23 +1652,9 @@ export class AvarikSaga extends Contract {
 
     "privateAmountMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    proof(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "proof()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     publicAmountMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
     "publicAmountMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    removeFromPresaleList(
-      entries: string[],
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "removeFromPresaleList(address[])"(
-      entries: string[],
-      overrides?: Overrides
-    ): Promise<BigNumber>;
 
     renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
 
@@ -1896,13 +1729,6 @@ export class AvarikSaga extends Contract {
 
     "setDefaultBaseURI(string)"(
       URI: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    setProvenanceHash(hash: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "setProvenanceHash(string)"(
-      hash: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1988,6 +1814,10 @@ export class AvarikSaga extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    whitelistSigner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "whitelistSigner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdraw(overrides?: Overrides): Promise<BigNumber>;
 
     "withdraw()"(overrides?: Overrides): Promise<BigNumber>;
@@ -2030,24 +1860,18 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    PRESALE_TYPEHASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PRESALE_TYPEHASH()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     PUBLIC_BUY_FREEZE_TIME(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "PUBLIC_BUY_FREEZE_TIME()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    addToPresaleList(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "addToPresaleList(address[],uint256[])"(
-      entries: string[],
-      maxAmounts: BigNumberish[],
-      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     approve(
@@ -2128,16 +1952,6 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isPresaler(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isPresaler(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     isSaleActive(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "isSaleActive()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2162,11 +1976,15 @@ export class AvarikSaga extends Contract {
 
     presaleBuy(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    "presaleBuy(uint256)"(
+    "presaleBuy(uint256,uint256,bytes)"(
       tokenQuantity: BigNumberish,
+      maxCount: BigNumberish,
+      signature: BytesLike,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2181,16 +1999,6 @@ export class AvarikSaga extends Contract {
 
     "presalePurchasedCount(address)"(
       addr: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    presalerList(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "presalerList(address)"(
-      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2212,26 +2020,12 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    proof(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "proof()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     publicAmountMinted(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "publicAmountMinted()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    removeFromPresaleList(
-      entries: string[],
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "removeFromPresaleList(address[])"(
-      entries: string[],
-      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
@@ -2319,16 +2113,6 @@ export class AvarikSaga extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setProvenanceHash(
-      hash: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "setProvenanceHash(string)"(
-      hash: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -2411,6 +2195,12 @@ export class AvarikSaga extends Contract {
     "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    whitelistSigner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "whitelistSigner()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     withdraw(overrides?: Overrides): Promise<PopulatedTransaction>;

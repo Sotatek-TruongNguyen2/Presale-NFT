@@ -5,9 +5,15 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-contract AvarikSaga is ERC721Enumerable, Ownable {
+import "hardhat/console.sol";
+
+contract AvarikSaga is EIP712, ERC721Enumerable, Ownable {
     using Strings for uint256;
+
+    bytes32 public constant PRESALE_TYPEHASH = keccak256("Presale(address buyer,uint256 maxCount)");
     
     uint256 public constant AVARIK_GIFT = 88;
     uint256 public constant AVARIK_PRIVATE = 800;
@@ -17,7 +23,6 @@ contract AvarikSaga is ERC721Enumerable, Ownable {
     uint256 public constant AVARIK_PER_MINT = 3;
     uint256 public constant AVARIK_PUBLIC_PER_SALER = 5;
     
-    mapping(address => uint256) public presalerList;
     mapping(address => uint256) public presalerListPurchases;
     mapping(address => uint256) public salerListPurchases;
     mapping(address => uint256) public salerLastPurchased;
@@ -26,8 +31,8 @@ contract AvarikSaga is ERC721Enumerable, Ownable {
     string private _tokenBaseURI;
     string private _defaultBaseURI;
     address private _artistAddress = 0xea68212b0450A929B14726b90550933bC12fF813;
-    
-    string public proof;
+    address public whitelistSigner;
+
     uint256 public giftedAmount;
     uint256 public publicAmountMinted;
     uint256 public privateAmountMinted;
@@ -35,26 +40,27 @@ contract AvarikSaga is ERC721Enumerable, Ownable {
     bool public presaleLive;
     bool public saleLive;
     
-    constructor(string memory tokenBaseURI_) ERC721("Avarik Saga", "AVARIK") {
+    constructor(
+        string memory tokenBaseURI_,
+        address _whitelistSigner
+    ) 
+        ERC721("Avarik Saga", "AVARIK")  
+        EIP712("Avarik Saga", "1.0.0") 
+    {
         _tokenBaseURI = tokenBaseURI_;
-    }
-    
-    function addToPresaleList(address[] calldata entries, uint[] calldata maxAmounts) external onlyOwner {
-        require(entries.length == maxAmounts.length, "DIFFERENT_SIZE");
-        for(uint256 i = 0; i < entries.length; i++) {
-            address entry = entries[i];
-            require(entry != address(0), "NULL_ADDRESS");
-            presalerList[entry] = maxAmounts[i];
-        }   
+        whitelistSigner = _whitelistSigner;
     }
 
-    function removeFromPresaleList(address[] calldata entries) external onlyOwner {
-        for(uint256 i = 0; i < entries.length; i++) {
-            address entry = entries[i];
-            require(entry != address(0), "NULL_ADDRESS");
-            
-            presalerList[entry] = 0;
-        }
+    function _hash(address _buyer, uint _maxCount) internal view returns(bytes32 hash) {
+        hash = _hashTypedDataV4(keccak256(abi.encode(
+            PRESALE_TYPEHASH,
+            _buyer,
+            _maxCount
+        )));
+    }
+
+    function _verify(bytes32 digest, bytes memory signature) internal view returns(bool) {
+        return ECDSA.recover(digest, signature) == whitelistSigner;
     }
     
     function buy(uint256 tokenQuantity) external payable {
@@ -77,17 +83,19 @@ contract AvarikSaga is ERC721Enumerable, Ownable {
         }
     }
     
-    function presaleBuy(uint256 tokenQuantity) external payable {
+    function presaleBuy(uint256 tokenQuantity, uint256 maxCount, bytes memory signature) external payable {
+        require(whitelistSigner != address(0), "Signer is default address!");
+        require(_verify(_hash(msg.sender, maxCount), signature), "The Signature is invalid!");
         require(!saleLive && presaleLive, "The presale is closed");
-        require(presalerList[msg.sender] > 0, "You are not qualified for the presale");
         require(totalSupply() < AVARIK_MAX, "All Avariks are minted");
         require(privateAmountMinted + tokenQuantity <= AVARIK_PRIVATE, "Minting would exceed the presale allocation");
-        require(presalerListPurchases[msg.sender] + tokenQuantity <= presalerList[msg.sender], "You can not mint exceeds maximum NFT");
+        require(presalerListPurchases[msg.sender] + tokenQuantity <= maxCount, "You can not mint exceeds maximum NFT");
         require(AVARIK_PRICE * tokenQuantity <= msg.value, "Insufficient ETH sent");
         
+        presalerListPurchases[msg.sender] += tokenQuantity;
+
         for (uint256 i = 0; i < tokenQuantity; i++) {
             privateAmountMinted++;
-            presalerListPurchases[msg.sender]++;
             _safeMint(msg.sender, totalSupply() + 1);
         }
     }
@@ -106,11 +114,7 @@ contract AvarikSaga is ERC721Enumerable, Ownable {
         payable(_artistAddress).transfer(address(this).balance * 2 / 5);
         payable(msg.sender).transfer(address(this).balance);
     }
-    
-    function isPresaler(address addr) external view returns (bool) {
-        return presalerList[addr] > 0;
-    }
-    
+
     function presalePurchasedCount(address addr) external view returns (uint256) {
         return presalerListPurchases[addr];
     }
@@ -129,10 +133,6 @@ contract AvarikSaga is ERC721Enumerable, Ownable {
     
     function toggleSaleStatus() external onlyOwner {
         saleLive = !saleLive;
-    }
-    
-    function setProvenanceHash(string calldata hash) external onlyOwner {
-        proof = hash;
     }
     
     function setContractURI(string calldata URI) external onlyOwner {

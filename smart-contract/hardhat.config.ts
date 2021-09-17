@@ -103,6 +103,10 @@ const config: HardhatUserConfig & { namedAccounts: any } = {
       [CHAIN_IDS.rinkeby]: "0x73964F6F211D5a8428322EDFbDfEc72FF76D9fCd",
       [CHAIN_IDS.bsc]: "0x73964F6F211D5a8428322EDFbDfEc72FF76D9fCd"
     },
+    signer: {
+      [CHAIN_IDS.rinkeby]: "0x73964F6F211D5a8428322EDFbDfEc72FF76D9fCd",
+      [CHAIN_IDS.bsc]: "0x73964F6F211D5a8428322EDFbDfEc72FF76D9fCd"
+    }
   },
   paths: {
     artifacts: "artifacts",

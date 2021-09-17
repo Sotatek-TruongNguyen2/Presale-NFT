@@ -4,7 +4,7 @@ import {DeployFunction} from 'hardhat-deploy/types';
 const deployVampire: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const {deployments, getNamedAccounts} = hre;
     const {deploy, execute} = deployments;
-    const {deployer} = await getNamedAccounts();
+    const {deployer, signer} = await getNamedAccounts();
     
     // You only need to change cid right here
     const cid = "QmVU8i23TV6MXvt3cuu9voRZVHS9SvkhW7rgsNVUJGBEuM";
@@ -12,7 +12,7 @@ const deployVampire: DeployFunction = async (hre: HardhatRuntimeEnvironment) => 
 
     const { address: contractAddress } = await deploy('AvarikSaga', {
       from: deployer,
-      args: [defaultBaseURI],
+      args: [defaultBaseURI, signer],
       log: true,
       deterministicDeployment: false,
       gasPrice: "0xEE6B2800"
