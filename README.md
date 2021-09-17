@@ -16,18 +16,18 @@
 5. Moreover, After cloning project from github, run "npm install" or "npm i" to make sure all packages will be installed on your local environment. 
 
 ## Business logic
-### UPLOAD FAKE NFT METADATA TO IPFS
+1. UPLOAD FAKE NFT METADATA TO IPFS
     + Step 1: Download IPFS onto your computer and you need to ensure IPFS is already installed in OS. But if you don't know how to download and install IPFS, please try to walk through this links and follow all steps: https://docs.ipfs.io/install/
     + Step 2: When IPFS is already installed, run IPFS daemon by using command: ipfs daemon.
     + Step 3: As you see, I prepared renderMetadata.js that helps you render fake metadata file to upload. You can run it by using node command or scripts that i listed in package.json.
     + Step 4: Upload to IPFS. Using command meta:upload. So all you need is replace cid variable inside smart-contract/deploy/AvarikSage.ts with cid of folder metadata when uploading is finished.
 
-### REVEAL REAL METADATA TO IPFS
+2. REVEAL REAL METADATA TO IPFS
     + Step 1: You need to upload images to IPFS then get cids of all images. Then save them to a file.
     + Step 2: Replace image field in metadata with corresponding image cid.
     + Step 3: Re-upload to IPFS then get cid of folder metadata and owner can call smart contract function "setBaseURI" with cid: https://ipfs.io/ipfs/${cid}/
 
-### DEPLOY SMART CONTRACT
+3. DEPLOY SMART CONTRACT
     + Step 1: in .env file replace DEPLOYER_PRIVATE_KEY with your private key.
     + Step 2: Make sure change cid in deploy/AvarikSage.ts with the latest cid that you have when uploaded metatdata to IPFS.
     + Step 3: Using npm run rinkeby:deploy to deploy contract to rinkeby for testing purpose. If you need to deploy to mainnet, you need to config network in hardhat.config.ts.
