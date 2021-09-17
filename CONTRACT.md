@@ -1,4 +1,4 @@
-- This file is all about the explanation of all functions, variables, commands that i used in smart contract. Moreover, I added some notes in the bottom about batch whitelisting in Presale round too. 
+#### This file is all about the explanation of all functions, variables, commands that i used in smart contract. Moreover, I added some notes in the bottom about batch whitelisting in Presale round too. 
 
 ## COMMANDS FOR DEPLOYMENT AND BATCH WHITELISTING.
 

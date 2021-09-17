@@ -1,4 +1,4 @@
-- This file is all about the main flows in presale, public round. It includes preparing, uploading metadata, contract deployment and revealing real metadata when the sale is ended.
+#### This file is all about the main flows in presale, public round. It includes preparing, uploading metadata, contract deployment and revealing real metadata when the sale is ended.
 ## MAIN FLOWS
 
 1. Presale:
