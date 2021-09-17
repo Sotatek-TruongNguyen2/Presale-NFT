@@ -30,9 +30,8 @@
 3. DEPLOY SMART CONTRACT
     + Step 1: in .env file replace DEPLOYER_PRIVATE_KEY with your private key.
     + Step 2: Make sure change cid in deploy/AvarikSage.ts with the latest cid that you have when uploaded metatdata to IPFS.
-    + Step 3: Using npm run rinkeby:deploy to deploy contract to rinkeby for testing purpose. If you need to deploy to mainnet, you need to config network in hardhat.config.ts.
-    + Step 4: Using npm run rinkeby:verify to verify contract source code or npx harhat verify command.
-
+    + Step 3: Using "npm run rinkeby:deploy" to deploy contract to rinkeby for testing purpose. If you need to deploy to mainnet, you need to use command "npm run mainnet:deploy" instead.
+    + Step 4: Using "npm run rinkeby:verify" to verify contracts source code on rinkeby or "npm run mainnet:verify" to verify contracts source code on mainnet. Another option is using "npx hardhat verify" command of hardhat instead of my scripts.
 ## Demo Frontend Features
 1. Query information in smart contract includes presale item price, presale status, tokenID metadata.
 2. In this demo, I using ethers.js for interacting with smart contract. you can use web3 instead.
