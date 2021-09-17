@@ -110,6 +110,25 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oldSigner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newSigner",
+        "type": "address"
+      }
+    ],
+    "name": "WhitelistSignerSettled",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "AVARIK_GIFT",
     "outputs": [
@@ -691,6 +710,19 @@
       }
     ],
     "name": "setDefaultBaseURI",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_whitelistSigner",
+        "type": "address"
+      }
+    ],
+    "name": "setWhitelistSigner",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

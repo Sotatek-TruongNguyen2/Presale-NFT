@@ -39,6 +39,8 @@ contract AvarikSaga is EIP712, ERC721Enumerable, Ownable {
     uint256 public PUBLIC_BUY_FREEZE_TIME = 600;
     bool public presaleLive;
     bool public saleLive;
+
+    event WhitelistSignerSettled(address oldSigner, address newSigner);
     
     constructor(
         string memory tokenBaseURI_,
@@ -61,6 +63,15 @@ contract AvarikSaga is EIP712, ERC721Enumerable, Ownable {
 
     function _verify(bytes32 digest, bytes memory signature) internal view returns(bool) {
         return ECDSA.recover(digest, signature) == whitelistSigner;
+    }
+
+    function setWhitelistSigner(address _whitelistSigner) external onlyOwner {
+        require(_whitelistSigner != whitelistSigner, "Signer is still the same!");
+        
+        address oldSigner = whitelistSigner;
+        whitelistSigner = _whitelistSigner;
+
+        emit WhitelistSignerSettled(oldSigner, whitelistSigner);
     }
     
     function buy(uint256 tokenQuantity) external payable {

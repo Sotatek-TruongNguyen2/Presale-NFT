@@ -60,6 +60,7 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "setBaseURI(string)": FunctionFragment;
     "setContractURI(string)": FunctionFragment;
     "setDefaultBaseURI(string)": FunctionFragment;
+    "setWhitelistSigner(address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "togglePresaleStatus()": FunctionFragment;
@@ -199,6 +200,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setDefaultBaseURI",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelistSigner",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -360,6 +365,10 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setWhitelistSigner",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
@@ -404,12 +413,14 @@ interface AvarikSagaInterface extends ethers.utils.Interface {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
+    "WhitelistSignerSettled(address,address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "WhitelistSignerSettled"): EventFragment;
 }
 
 export class AvarikSaga extends Contract {
@@ -687,6 +698,16 @@ export class AvarikSaga extends Contract {
 
     "setDefaultBaseURI(string)"(
       URI: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    setWhitelistSigner(
+      _whitelistSigner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "setWhitelistSigner(address)"(
+      _whitelistSigner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -1039,6 +1060,16 @@ export class AvarikSaga extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  setWhitelistSigner(
+    _whitelistSigner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "setWhitelistSigner(address)"(
+    _whitelistSigner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -1368,6 +1399,16 @@ export class AvarikSaga extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setWhitelistSigner(
+      _whitelistSigner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setWhitelistSigner(address)"(
+      _whitelistSigner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -1479,6 +1520,8 @@ export class AvarikSaga extends Contract {
       to: string | null,
       tokenId: BigNumberish | null
     ): EventFilter;
+
+    WhitelistSignerSettled(oldSigner: null, newSigner: null): EventFilter;
   };
 
   estimateGas: {
@@ -1729,6 +1772,16 @@ export class AvarikSaga extends Contract {
 
     "setDefaultBaseURI(string)"(
       URI: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    setWhitelistSigner(
+      _whitelistSigner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "setWhitelistSigner(address)"(
+      _whitelistSigner: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -2110,6 +2163,16 @@ export class AvarikSaga extends Contract {
 
     "setDefaultBaseURI(string)"(
       URI: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    setWhitelistSigner(
+      _whitelistSigner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "setWhitelistSigner(address)"(
+      _whitelistSigner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
