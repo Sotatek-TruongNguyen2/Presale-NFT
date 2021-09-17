@@ -1,4 +1,4 @@
-I. Prerequisite:
+I. Prerequisite.
     + You must equip yourself with knowledge about "IPFS" and "hardhat". These are very important tools that will help you in uploading metadata and deploying contract. 
     
     + Firstly, you need to download these tools by following the links below: 
@@ -11,7 +11,7 @@ I. Prerequisite:
 
     + Moreover, After cloning project from github, run "npm install" or "npm i" to make sure all packages will be installed on your local environment. 
 
-II. Business logic:
+II. Business logic.
     1. UPLOAD FAKE NFT METADATA TO IPFS
         + Step 1: You need to ensure IPFS is already installed in OS.
         + Step 2: Run IPFS daemon by using command: ipfs daemon.
