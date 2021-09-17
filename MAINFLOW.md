@@ -16,10 +16,12 @@
     - Step 5: Add whitelisted users to presale list by using addToPresaleList function on smart contract.
     - Step 6: Call function togglePresaleStatus to start presale round.
     - Step 7: Whitelisted users can go and buy Presale NFT by using presaleBuy function.
+
 2. Sale:
     - Step 1: Call function togglePresaleStatus again to end presale round.
     - Step 2: Call function toggleSaleStatus to start sale round.
     - Step 3: All Users can go and buy NFT by using buy function.
+    
 3. Reveal real data:
     - Step 1: Upload images to IPFS by using "image:upload" command. NOTES: Images which will be used for revealing are placed in smart-contract-metadata/assets
     - Step 2: After uploading is finished, you can copy all cids of uploaded images and place them in imageUrl variable inside renderNewMetadata.js.
