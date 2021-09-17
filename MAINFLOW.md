@@ -1,4 +1,7 @@
 ## MAIN FLOWS
+
+### This file is all about the main flows in presale, public round. It includes preparing, uploading metadata, contract deployment and revealing real metadata when the sale is ended.
+
 1. Presale:
     - Step 1: Inside renderMetadata.js, you guys can go and change metaData object to your desired metaData. NOTES: In the for loop, change "name" property if you want.
     - Step 2: Render fake metadata by using "meta:fake:render" command that i already listed in package.json file.

@@ -1,4 +1,7 @@
 ## COMMANDS FOR DEPLOYMENT AND BATCH WHITELISTING.
+
+### This file is all about the explanation of all functions, variables, commands that i used in smart contract. Moreover, I added some notes in the bottom about batch whitelisting in Presale round too. 
+
 1. DEV ENVIRONMENT:
     + npx hardhat compile : To compile your contracts in your Hardhat project.
 

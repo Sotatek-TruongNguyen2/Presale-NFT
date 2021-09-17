@@ -15,7 +15,8 @@
 
 5. Moreover, After cloning project from github, run "npm install" or "npm i" to make sure all packages will be installed on your local environment. 
 
-## Business logic
+## DEPLOYMENT
+### IPFS
 1. UPLOAD FAKE NFT METADATA TO IPFS
     + Step 1: Download IPFS onto your computer and you need to ensure IPFS is already installed in OS. But if you don't know how to download and install IPFS, please try to walk through this links and follow all steps: https://docs.ipfs.io/install/
     + Step 2: When IPFS is already installed, run IPFS daemon by using command: ipfs daemon.
@@ -27,11 +28,14 @@
     + Step 2: Replace image field in metadata with corresponding image cid.
     + Step 3: Re-upload to IPFS then get cid of folder metadata and owner can call smart contract function "setBaseURI" with cid: https://ipfs.io/ipfs/${cid}/
 
-3. DEPLOY SMART CONTRACT
-    + Step 1: in .env file replace DEPLOYER_PRIVATE_KEY with your private key.
-    + Step 2: Make sure change cid in deploy/AvarikSage.ts with the latest cid that you have when uploaded metatdata to IPFS.
-    + Step 3: Using "npm run rinkeby:deploy" to deploy contract to rinkeby for testing purpose. If you need to deploy to mainnet, you need to use command "npm run mainnet:deploy" instead.
-    + Step 4: Using "npm run rinkeby:verify" to verify contracts source code on rinkeby or "npm run mainnet:verify" to verify contracts source code on mainnet. Another option is using "npx hardhat verify" command of hardhat instead of my scripts.
-## Demo Frontend Features
-1. Query information in smart contract includes presale item price, presale status, tokenID metadata.
-2. In this demo, I using ethers.js for interacting with smart contract. you can use web3 instead.
+### DEPLOY SMART CONTRACT
++ Step 1: Make sure hardhat is already installed in this project by running "npx hardhat --version" inside smart-contract folder.If It not installed yet, you need to run "npm install --save hardhat" to install it.
++ Step 2: in .env file replace DEPLOYER_PRIVATE_KEY with your private key.
++ Step 3: Make sure change cid in deploy/AvarikSage.ts with the latest cid that you have when uploaded metatdata to IPFS.
++ Step 4: To deploy smart contracts to other Ethereum networks: 
+    - Testnet (Rinkeby): Using "npm run rinkeby:deploy" command.
+    - Mainnet (Ethereum): Using "npm run mainnet:deploy" command instead.
++ Step 5: To verify smart contracts to other Ethereum networks:  
+    - Testnet (Rinkeby): Using "npm run rinkeby:verify" command.
+    - Mainnet (Ethereum): Using "npm run mainnet:verify" command instead.
+    - Another option is using "npx hardhat verify" command of hardhat instead of my scripts. Referral link: https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html
