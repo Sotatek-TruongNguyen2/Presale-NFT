@@ -1,6 +1,6 @@
 
-## This file is all about the main flows in presale, public round. It includes preparing, uploading metadata, contract deployment and revealing real metadata when the sale is ended.
-### MAIN FLOWS
+-- This file is all about the main flows in presale, public round. It includes preparing, uploading metadata, contract deployment and revealing real metadata when the sale is ended.
+## MAIN FLOWS
 
 1. Presale:
     - Step 1: Inside renderMetadata.js, you guys can go and change metaData object to your desired metaData. NOTES: In the for loop, change "name" property if you want.
