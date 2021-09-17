@@ -10,13 +10,17 @@
 
     + npm run add:whitelist : To batch add whitelisted users to list.
 
-    + npm run rinkeby:deploy : To deploy contracts to rinkeby testnet for testing purpose.
+    + RINKEBY DEPLOYMENT: 
 
-    + npm run rinkeby:verify : To verify contracts after deployed to rinkeby successful.
+        + npm run rinkeby:deploy : To deploy contracts to rinkeby testnet for testing purpose.
 
-    + npm run mainnet:deploy : To deploy contracts to mainnet.
+        + npm run rinkeby:verify : To verify contracts after deployed to rinkeby successful.
 
-    + npm run mainnet:verify : To verify contracts after deployed to mainnet successful.
+    + MAINNET DEPLOYMENT:
+    
+        + npm run mainnet:deploy : To deploy contracts to mainnet.
+
+        + npm run mainnet:verify : To verify contracts after deployed to mainnet successful.
 
 + EXPLAIN ALL VARIABLES IN SMART CONTRACT
     - AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).
