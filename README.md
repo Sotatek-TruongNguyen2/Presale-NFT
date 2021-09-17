@@ -3,9 +3,9 @@
     
 2. Firstly, you need to download these tools by following the links below: 
     + https://docs.ipfs.io/install/ (For IPFS)
-    + For hardhat, I already listed it in package.json file so you don't need to download it again.
+    + For hardhat, I already listed it in package.json file, so you don't need to download it again.
 
-3. Secondly, If you don't know about these tools, please go through the guild below and try to understand about these concepts at least:
+3. Secondly, If you don't know about these tools, please walk through the guild below and try to understand about these concepts at least:
     + https://docs.ipfs.io/how-to/command-line-quick-start/
     + https://hardhat.org/getting-started/#quick-start
 

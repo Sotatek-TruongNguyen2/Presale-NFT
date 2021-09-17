@@ -61,11 +61,15 @@
 + ** NOTES **  Make sure public sale and presale status can't be "ON" at the same time. For instance, if you want to active Presale, you must turn off Public Sale and turn on Presale, and vice versa.
 
 ## MAIN CONTRACT VARIABLES
-1. AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).For instance, AVARIK_GIFT = 100 => There will be maximum 100 NFTs which is prepared for gifting.
-2. AVARIK_PRIVATE: Total Amounts of NFTs for PreSale.For instance, AVARIK_PRIVATE = 100 => There will be maximum 100 NFTs which is prepared for presale round.
-3. AVARIK_PUBLIC: Total Amounts of NFTs for Public Sale.For instance, AVARIK_PUBLIC = 100 => There will be maximum 100 NFTs which is prepared for public sale round.
-4. AVARIK_PRICE: Price of single NFT.For instance, AVARIK_PRICE = 0.08 ether => Users must pay 0.08 ether for each NFT that they want to buy in any round.
-5. AVARIK_PER_MINT: Max NFTs per transaction can be minted in Public Sale.For instance, AVARIK_PER_MINT = 3 => Users only able to mint max 3 NFTs per transaction in public sale round
+1. AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).
+- For instance, AVARIK_GIFT = 100 => There will be maximum 100 NFTs which is prepared for gifting.
+2. AVARIK_PRIVATE: Total Amounts of NFTs for PreSale.
+- For instance, AVARIK_PRIVATE = 100 => There will be maximum 100 NFTs which is prepared for presale round.
+3. AVARIK_PUBLIC: Total Amounts of NFTs for Public Sale.
+- For instance, AVARIK_PUBLIC = 100 => There will be maximum 100 NFTs which is prepared for public sale round.
+4. AVARIK_PRICE: Price of single NFT.
+- For instance, AVARIK_PRICE = 0.08 ether => Users must pay 0.08 ether for each NFT that they want to buy in any round.
+5. AVARIK_PER_MINT: Max NFTs per transaction can be minted in Public Sale.- For instance, AVARIK_PER_MINT = 3 => Users only able to mint max 3 NFTs per transaction in public sale round
 6. AVARIK_PUBLIC_PER_SALER: Max NFTs that one person can purchase in Public Sale.
 7. PUBLIC_BUY_FREEZE_TIME: freeze time that buyer need to wait for the next buy in public sale round.
 8. _artistAddress: This address will receive 2/5 raising amounts when owner withdraw it.
