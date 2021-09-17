@@ -1,6 +1,6 @@
-## COMMANDS FOR DEPLOYMENT AND BATCH WHITELISTING.
+## This file is all about the explanation of all functions, variables, commands that i used in smart contract. Moreover, I added some notes in the bottom about batch whitelisting in Presale round too. 
 
-### This file is all about the explanation of all functions, variables, commands that i used in smart contract. Moreover, I added some notes in the bottom about batch whitelisting in Presale round too. 
+### COMMANDS FOR DEPLOYMENT AND BATCH WHITELISTING.
 
 1. DEV ENVIRONMENT:
     + npx hardhat compile : To compile your contracts in your Hardhat project.
@@ -20,7 +20,7 @@
 
     + npm run mainnet:verify : To verify contracts after deployed to mainnet successful.
 
-## MAIN CONTRACT FUNCTIONS.
+### MAIN CONTRACT FUNCTIONS.
 1.  function addToPresaleList(address[] calldata entries, uint[] calldata maxAmounts) external onlyOwner;
     * Add Whitelisted users to Presale list with corresponding max amounts.
     * Params: 
@@ -63,7 +63,7 @@
 
 + ** NOTES **  Make sure public sale and presale status can't be "ON" at the same time. For instance, if you want to active Presale, you must turn off Public Sale and turn on Presale, and vice versa.
 
-## MAIN CONTRACT VARIABLES
+### MAIN CONTRACT VARIABLES
 1. AVARIK_GIFT: Total Amounts of NFTs for gifting. (Only owner can do gifting).
 - For instance, AVARIK_GIFT = 100 => There will be maximum 100 NFTs which is prepared for gifting.
 2. AVARIK_PRIVATE: Total Amounts of NFTs for PreSale.
@@ -83,7 +83,7 @@
 13. saleLive: Public sale round is enabled or not
 14. _tokenBaseURI: Base TOKEN URI that help you link to your metadata on IPFS
 
-## NOTES
+### NOTES
 1. Rinkeby Contract Addresses for testing purpose
     + NFT: 0x2a66D89c08E6DA9E824dCB0c9326dc383a065BE6
     + BuyPresale txs:
